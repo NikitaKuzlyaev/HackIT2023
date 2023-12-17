@@ -1,0 +1,16 @@
+import sys
+
+n = int(sys.stdin.readline())
+a = list(map(int, sys.stdin.readline().split()))
+t = list(map(int, sys.stdin.readline().split()))
+
+min_t = [1 << 60, 1 << 60]
+
+for i in range(n):
+    min_t[t[i]] = min(min_t[t[i]], a[i])
+
+res = sum(min_t)
+if res < 1 << 60:
+    print(res)
+else:
+    print(-1)
