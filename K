@@ -1,0 +1,49 @@
+def gen():
+    d = random.randint(1, 50)
+    s = random.randint(1, 1000)
+
+    print(d, s)
+    f = open('gen','w')
+    f.write(str(d) + '\n')
+
+    for i in range(d):
+        l = random.randint(1896, 2024)
+        r = min(2024, l + 1)
+        #r = random.randint(l, 2024)
+        f.write(str(l) + " " + str(r) + '\n')
+
+    f.write(str(s) + '\n')
+
+    for i in range(s):
+        l = random.randint(1896, 2024)
+
+        r = min(2024, l + 1)
+        #r = random.randint(l, 2024)
+        f.write(str(l) + " " + str(r) + '\n')
+
+    f.close()
+
+
+def solve():
+    d = int(input())
+    dlr = [list(map(int, input().split())) for i in range(d)]
+
+    s = int(input())
+
+    mx_res = 0
+
+    for i in range(s):
+        ls, rs = map(int, input().split())
+        cur = 0
+
+        for ld, rd in dlr:
+            cur += int(max(ls, ld) <= min(rs, rd))
+
+        mx_res = max(mx_res, cur)
+
+    print(mx_res)
+    return
+
+
+if __name__ == "__main__":
+    solve()
