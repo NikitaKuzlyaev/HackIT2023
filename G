@@ -1,0 +1,34 @@
+import random
+import sys
+import math
+
+
+def solve():
+    n = int(input())
+    s = str(input())
+    t = str(input())
+
+    f = {}
+    res = 0
+    for i in range(n):
+        if s[i] != t[i]:
+            ab = s[i] + t[i]
+            ba = t[i] + s[i]
+
+            if ba in f and f[ba] > 0:
+                f[ba] -= 1
+                #res -= 1
+            else:
+                res += 1
+                #print(i, s[i], t[i])
+                if ab in f:
+                    f[ab] += 1
+                else:
+                    f[ab] = 1
+
+
+    print(res)
+
+
+if __name__ == "__main__":
+    solve()
