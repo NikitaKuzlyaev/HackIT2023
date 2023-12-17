@@ -1,0 +1,23 @@
+def solve():
+    n = int(input())
+    s = str(input())
+ 
+    t = ""
+    count = 0
+    for i in s:
+        if i != "r":
+            t += "r" * count + "r" * int(count > 0)
+            count = 0
+            t += i
+        else:
+            count += 1
+ 
+    t += "r" * count
+ 
+    print(t)
+    return
+ 
+ 
+if __name__ == "__main__":
+ 
+    solve()
