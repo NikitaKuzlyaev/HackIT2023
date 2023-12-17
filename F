@@ -1,0 +1,86 @@
+
+import sys
+
+
+def gen():
+    return
+
+def solve():
+    n = int(sys.stdin.readline())
+
+    # key: 0 - entrance, 1 - quit
+    props = {}
+    # locked id's
+    lock = set()
+
+    for i in range(n):
+        comm, id = map(str, sys.stdin.readline().strip().split())
+        ans = 'Ok'
+
+        if comm == "add":
+            if id in props:
+                ans = 'Fail Add'
+            else:
+                props[id] = 0
+
+        elif comm == "delete":
+            lock.discard(id)
+            if id in props:
+                del props[id]
+
+        elif comm == "entrance":
+            if id not in props:
+                ans = "Id does not exist"
+            else:
+                if id in lock:
+                    ans = "Blocked"
+                else:
+                    if props[id] == 1:
+                        ans = "No permission"
+                    else:
+                        props[id] = 1
+                        ans = "Ok"
+
+        elif comm == "quit":
+            if id not in props:
+                ans = "Id does not exist"
+            else:
+                if id in lock:
+                    ans = "Blocked"
+                else:
+                    if props[id] == 0:
+                        ans = "No permission"
+                    else:
+                        props[id] = 0
+                        ans = "Ok"
+
+        elif comm == "block":
+            if id not in props:
+                ans = "Id does not exist"
+            else:
+                lock.add(id)
+
+        elif comm == "unblock":
+            if id not in props:
+                ans = "Id does not exist"
+            else:
+                lock.discard(id)
+
+        else:
+            # защита от неверного формата входных данных
+            k = 0
+            print(1 / k)
+
+        sys.stdout.write(ans + '\n')
+
+    return
+
+
+if __name__ == "__main__":
+    mt = 0
+    if mt:
+        t = int(sys.stdin.readline())
+        for i in range(t):
+            solve()
+    else:
+        solve()
