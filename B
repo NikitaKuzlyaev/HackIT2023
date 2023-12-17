@@ -1,0 +1,22 @@
+import math
+
+
+def solve():
+    a,b,c = map(int, input().split())
+    
+    if a == b and b == c:
+        print("YES")
+        return
+    
+    g = math.gcd(math.gcd(abs(a-b), abs(a-c)), abs(b-c))
+    
+    if g >= 2:
+        print("YES")
+    else:
+        print("NO")
+
+    return
+
+
+if __name__ == "__main__":
+    solve()
