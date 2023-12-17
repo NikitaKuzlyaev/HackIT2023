@@ -1,0 +1,58 @@
+import sys
+from random import randint as rn
+import random
+
+
+
+
+def solve():
+    n = int(sys.stdin.readline())
+
+    size = [1 for i in range(n)]
+    par = [i for i in range(n)]
+
+    def cap(a):
+        x = a * 1
+        while par[x] != x:
+            x = par[x]
+        return x
+
+    def unite(a, b):
+        a, b = cap(a), cap(b)
+        if a == b:
+            return
+        if size[a] < size[b]:
+            a, b = b, a
+        size[a] += size[b]
+        par[b] = a
+
+    last = {}
+
+    for i in range(n):
+        a, b = map(int, sys.stdin.readline().split())
+        if a in last:
+            unite(last[a], i)
+        if b in last:
+            unite(last[b], i)
+        last[a] = i
+        last[b] = i
+
+    print(max(size))
+
+    return
+
+
+if __name__ == '__main__':
+
+    # gen()
+    # quit()
+
+    multitest = 0
+
+    if multitest:
+        t = int(sys.stdin.readline())
+        for _ in range(t):
+            solve()
+    else:
+        solve()
+    # gen()
