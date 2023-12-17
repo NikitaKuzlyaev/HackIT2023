@@ -1,0 +1,45 @@
+import math
+import sys
+from random import randint as rn
+import random
+import functools
+from heapq import heappop, heappush
+
+
+def solve():
+    n = int(sys.stdin.readline())
+    a = list(map(int, sys.stdin.readline().split()))
+
+    can_use = [2 for i in range(n)]
+
+    def swap(i, j):
+        can_use[i], can_use[j] = can_use[j] - 1, can_use[i] - 1
+        a[i], a[j] = a[j], a[i]
+
+    for i in range(n):
+        if i + 2 < n:
+            if can_use[i + 2] == 2 and min(can_use[i], can_use[i + 1]) >= 1:
+                if a[i + 2] < min(a[i], a[i + 1]):
+                    swap(i + 1, i + 2)
+                    swap(i, i + 1)
+        if i + 1 < n:
+            if min(can_use[i], can_use[i + 1]) >= 1:
+                if a[i + 1] < a[i]:
+                    swap(i, i + 1)
+
+    sys.stdout.write(' '.join(map(str, a)) + '\n')
+
+    return
+
+
+if __name__ == '__main__':
+
+    multitest = 0
+
+    if multitest:
+        t = int(sys.stdin.readline())
+        for _ in range(t):
+            solve()
+    else:
+        solve()
+    # gen()
