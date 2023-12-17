@@ -1,0 +1,42 @@
+import sys
+import random
+
+
+def gen():
+    n = random.randint(100000, 100000)
+    f = open('gen.txt', 'w')
+    f.write(str(n) + '\n')
+
+    f.write(' '.join(map(str, [random.randint(1, 100) for i in range(n)])))
+    f.write('\n')
+
+
+    f.close()
+
+
+def solve():
+    # gen()
+    # return
+
+    n = int(sys.stdin.readline())
+    c = list(map(int, sys.stdin.readline().split()))
+    mod = 10 ** 9 + 7
+
+    v = [0 for i in range(56)]
+    for i in range(n):
+        v[55] = (v[55] * 2) % mod
+        for j in range(54, 0, -1):
+
+            if j + c[i] >= 55:
+                v[55] = (v[55] + v[j]) % mod
+            else:
+                if v[j] != 0:
+                    v[j + c[i]] = (v[j + c[i]] + v[j]) % mod
+
+        v[min(55, c[i])] += 1
+
+    print(v[-1] % mod)
+
+
+if __name__ == '__main__':
+    solve()
