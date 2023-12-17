@@ -1,0 +1,46 @@
+import sys
+
+def solve():
+    #gen()
+    #return
+
+    n = int(sys.stdin.readline())
+    a = list(map(int, sys.stdin.readline().split()))
+    b = list(map(int, sys.stdin.readline().split()))
+
+    m, d = map(int, sys.stdin.readline().split())
+    c = list(map(int, sys.stdin.readline().split()))
+    c.sort(reverse=True)
+
+    l = 1
+    r = sum(a) << 1
+
+    while l <= r:
+        mid = (l + r) >> 1
+        hp = mid * 1
+        money = 0
+        pi = 0
+        flag = True
+
+        for i in range(n):
+            if pi < m and money >= d:
+                money -= d
+                hp += c[pi]
+                pi += 1
+            hp -= a[i]
+            money += b[i]
+
+            if hp <= 0:
+                flag = False
+                break
+
+        if not flag:
+            l = mid + 1
+        else:
+            r = mid - 1
+
+    print(l)
+
+
+if __name__ == '__main__':
+    solve()
